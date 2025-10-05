@@ -26,3 +26,7 @@ Your app is ready to be deployed!
 ## Deployment
 
 Learn more about deploying your application with the [documentations](https://vite.dev/guide/static-deploy.html)
+
+## Docker
+docker run -it --rm -v "${PWD}:/app" -w /app -p 5173:5173 node:20-alpine sh
+npm run dev -- --host 0.0.0.0
