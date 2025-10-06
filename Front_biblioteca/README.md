@@ -32,7 +32,7 @@ docker run -it --rm -v "${PWD}:/app" -w /app -p 5173:5173 node:20-alpine sh
 npm run dev -- --host 0.0.0.0
 
 ## si sale problemas en el index (f12 en la pagina) seguir estos pasos
- # 1. Elimina la carpeta de dependencias (¡Esto la borra también de tu PC local!)
+ # 1. Elimina la carpeta de dependencias, esto desde la pc
 rm -rf node_modules
 
 # 2. Elimina el archivo de bloqueo
@@ -41,10 +41,11 @@ rm package-lock.json
 # 3. Elimina la caché de Vite (si existe)
 rm -rf node_modules/.vite
 
+# 3. Elimina la caché de Vite (si existe)
 npm install
 
 npm run dev -- --host 0.0.0.0
 
 # Usuarios de prueba:
-ID: 1 - Juan Pérez
-ID: 2 - María García
+id: 1, nombre: "Juan Pérez", correo: "juan@biblioteca.com", password: "123" 
+id: 2, nombre: "María García", correo: "maria@biblioteca.com", password: "456" 

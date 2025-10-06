@@ -1,7 +1,7 @@
 // src/stores/auth.js
 import { createSignal } from "solid-js";
 
-const [user, setUser] = createSignal(null);
+const [user, setUser] = createSignal(JSON.parse(localStorage.getItem("user")) || null);
 
 // Usuarios mock en memoria
 const mockUsers = [
@@ -11,40 +11,38 @@ const mockUsers = [
 
 let nextUserId = 3;
 
-async function register(data) {
-  // Simular delay de red
+async function register({ nombre, correo, password }) {
   await new Promise(resolve => setTimeout(resolve, 500));
-  
-  // Crear nuevo usuario
-  const newUser = {
-    id: nextUserId++,
-    nombre: data.nombre,
-    correo: data.correo,
-    password: data.password
-  };
-  
+
+  // Validar si ya existe el correo
+  if (mockUsers.find(u => u.correo === correo)) {
+    throw new Error("El correo ya está registrado");
+  }
+
+  const newUser = { id: nextUserId++, nombre, correo, password };
   mockUsers.push(newUser);
   setUser(newUser);
-  
+  localStorage.setItem("user", JSON.stringify(newUser));
+
   return newUser;
 }
 
-async function login(userId) {
-  // Simular delay de red
+async function login({ correo, password }) {
   await new Promise(resolve => setTimeout(resolve, 500));
-  
-  const foundUser = mockUsers.find(u => u.id === parseInt(userId));
-  
-  if (!foundUser) {
-    throw new Error("Usuario no encontrado");
-  }
-  
+
+  // Buscar usuario por correo y contraseña
+  const foundUser = mockUsers.find(u => u.correo === correo && u.password === password);
+  if (!foundUser) throw new Error("Correo o contraseña incorrectos");
+
   setUser(foundUser);
+  localStorage.setItem("user", JSON.stringify(foundUser));
+
   return foundUser;
 }
 
 function logout() {
   setUser(null);
+  localStorage.removeItem("user");
 }
 
 export default {

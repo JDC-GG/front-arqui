@@ -5,7 +5,8 @@ import auth from "../stores/auth";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [userId, setUserId] = createSignal("");
+  const [correo, setCorreo] = createSignal("");
+  const [password, setPassword] = createSignal("");
   const [mensaje, setMensaje] = createSignal("");
   const [loading, setLoading] = createSignal(false);
 
@@ -15,11 +16,11 @@ export default function Login() {
     setMensaje("");
     
     try {
-      await auth.login(userId());
-      setMensaje(" Login exitoso");
+      await auth.login({ correo: correo(), password: password() });
+      setMensaje("✅ Login exitoso");
       setTimeout(() => navigate("/menu"), 500);
     } catch (error) {
-      setMensaje(" Usuario no encontrado");
+      setMensaje("❌ Correo o contraseña incorrectos");
     } finally {
       setLoading(false);
     }
@@ -43,12 +44,12 @@ export default function Login() {
         "max-width": "400px"
       }}>
         <div style={{ "text-align": "center", "margin-bottom": "30px" }}>
-          <div style={{ "font-size": "64px", "margin-bottom": "10px" }}></div>
           <h2 style={{ "margin": "0", "color": "#333", "font-size": "28px" }}>Biblioteca Virtual</h2>
           <p style={{ "color": "#666", "margin-top": "8px" }}>Ingresa a tu cuenta</p>
         </div>
 
         <form onSubmit={handleLogin}>
+          {/* Campo correo */}
           <div style={{ "margin-bottom": "20px" }}>
             <label style={{
               "display": "block",
@@ -56,13 +57,13 @@ export default function Login() {
               "color": "#555",
               "font-weight": "600"
             }}>
-              ID de Usuario
+              Correo
             </label>
             <input
-              type="text"
-              value={userId()}
-              onInput={(e) => setUserId(e.target.value)}
-              placeholder="Ejemplo: 1"
+              type="email"
+              value={correo()}
+              onInput={(e) => setCorreo(e.target.value)}
+              placeholder="ejemplo@biblioteca.com"
               required
               style={{
                 "width": "100%",
@@ -70,7 +71,35 @@ export default function Login() {
                 "border": "2px solid #e0e0e0",
                 "border-radius": "8px",
                 "font-size": "16px",
-                "transition": "border-color 0.3s",
+                "box-sizing": "border-box"
+              }}
+              onFocus={(e) => e.target.style.borderColor = "#667eea"}
+              onBlur={(e) => e.target.style.borderColor = "#e0e0e0"}
+            />
+          </div>
+
+          {/* Campo contraseña */}
+          <div style={{ "margin-bottom": "20px" }}>
+            <label style={{
+              "display": "block",
+              "margin-bottom": "8px",
+              "color": "#555",
+              "font-weight": "600"
+            }}>
+              Contraseña
+            </label>
+            <input
+              type="password"
+              value={password()}
+              onInput={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+              style={{
+                "width": "100%",
+                "padding": "12px 16px",
+                "border": "2px solid #e0e0e0",
+                "border-radius": "8px",
+                "font-size": "16px",
                 "box-sizing": "border-box"
               }}
               onFocus={(e) => e.target.style.borderColor = "#667eea"}
@@ -94,7 +123,7 @@ export default function Login() {
               "transition": "transform 0.2s",
               "margin-bottom": "16px"
             }}
-            onMouseEnter={(e) => !loading() && (e.target.style.transform = "translateY(-2px)")}
+            onMouseEnter={(e) => !loading() && (e.target.style.transform = "translateY(-2px)") }
             onMouseLeave={(e) => e.target.style.transform = "translateY(0)"}
           >
             {loading() ? "Ingresando..." : "Ingresar"}
