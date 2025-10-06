@@ -2,29 +2,25 @@ import { useNavigate } from "@solidjs/router";
 import auth from "../stores/auth";
 
 export default function Menu() {
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-const handleLogout = () => {
-    auth.clearUser();
+  const logout = () => {
+    auth.logout();
     navigate("/login");
-};
+  };
 
-return (
-    <div style={{ padding: "2rem" }}>
-<h2>Bienvenido, {auth.user?.name || "Usuario"}</h2>
+  return (
+    <div>
+      <h2> Menú Principal</h2>
+      <p>Bienvenido, {auth.user?.nombre || "Usuario"} </p>
 
-<div style={{ margin: "1rem 0" }}>
-        <button onClick={() => navigate("/libros")} style={{ marginRight: "1rem" }}>
-Listar Libros
+      <div style={{ display: "flex", "flex-direction": "column", gap: "10px" }}>
+        <button onClick={() => navigate("/libros")}>📖 Listar Libros</button>
+        <button onClick={() => navigate("/prestamos")}>📋 Ver Préstamos</button>
+        <button style={{ "background-color": "red", color: "white" }} onClick={logout}>
+           Cerrar sesión
         </button>
-        <button onClick={() => navigate("/prestamos")}>
-Préstamos Activos
-        </button>
-</div>
-
-<button onClick={handleLogout} style={{ marginTop: "2rem", color: "red" }}>
-        Cerrar Sesión
-</button>
+      </div>
     </div>
-);
+  );
 }

@@ -30,3 +30,17 @@ Learn more about deploying your application with the [documentations](https://vi
 ## Docker
 docker run -it --rm -v "${PWD}:/app" -w /app -p 5173:5173 node:20-alpine sh
 npm run dev -- --host 0.0.0.0
+
+## si sale problemas en el index (f12 en la pagina) seguir estos pasos
+ # 1. Elimina la carpeta de dependencias (¡Esto la borra también de tu PC local!)
+rm -rf node_modules
+
+# 2. Elimina el archivo de bloqueo
+rm package-lock.json 
+
+# 3. Elimina la caché de Vite (si existe)
+rm -rf node_modules/.vite
+
+npm install
+
+npm run dev -- --host 0.0.0.0
