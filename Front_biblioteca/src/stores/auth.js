@@ -5,7 +5,7 @@ const [user, setUser] = createSignal(JSON.parse(localStorage.getItem("user")) ||
 
 // Usuarios mock en memoria
 const mockUsers = [
-  { id: 1, nombre: "Juan Pérez", correo: "juan@biblioteca.com", password: "123" },
+  { id: 1, nombre: "Juan Pérez", correo: "juan.sebastian@gmail.com", password: "123" },
   { id: 2, nombre: "María García", correo: "maria@biblioteca.com", password: "456" },
 ];
 

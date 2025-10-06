@@ -1,7 +1,7 @@
 import { Router, Route } from "@solidjs/router";
 
 // Componentes
-import Login from "./components/Login";
+import Login from "./components/login";
 import Register from "./components/Register";
 import Menu from "./components/Menu";
 import BooksList from "./components/BooksList";
