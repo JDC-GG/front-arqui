@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app              # Monta tu código local
+      - /app/node_modules   # Preserva node_modules del contenedor
+    command: vite --host 0.0.0.0 --host 0.0.0.0
