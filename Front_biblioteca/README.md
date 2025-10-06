@@ -44,3 +44,7 @@ rm -rf node_modules/.vite
 npm install
 
 npm run dev -- --host 0.0.0.0
+
+# Usuarios de prueba:
+ID: 1 - Juan Pérez
+ID: 2 - María García

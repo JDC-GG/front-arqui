@@ -19,7 +19,7 @@ export default function Login() {
       setMensaje(" Login exitoso");
       setTimeout(() => navigate("/menu"), 500);
     } catch (error) {
-      setMensaje("❌ Usuario no encontrado");
+      setMensaje(" Usuario no encontrado");
     } finally {
       setLoading(false);
     }
@@ -135,21 +135,6 @@ export default function Login() {
             </button>
           </div>
         </form>
-
-        <div style={{
-          "margin-top": "24px",
-          "padding": "16px",
-          "background": "#f8f9fa",
-          "border-radius": "8px",
-          "font-size": "14px",
-          "color": "#666"
-        }}>
-          <strong> Usuarios de prueba:</strong>
-          <div style={{ "margin-top": "8px" }}>
-            ID: <code style={{ "background": "#e9ecef", "padding": "2px 6px", "border-radius": "4px" }}>1</code> - Juan Pérez<br/>
-            ID: <code style={{ "background": "#e9ecef", "padding": "2px 6px", "border-radius": "4px" }}>2</code> - María García
-          </div>
-        </div>
       </div>
     </div>
   );
